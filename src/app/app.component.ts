@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Data } from '../app/model/data.model'
 import { DataService } from './data.service';
 
@@ -7,12 +7,15 @@ import { DataService } from './data.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent{
+export class AppComponent implements OnInit{
   title = 'senwell-task';
 
   dataList:Data[] =[]
 
-  constructor (private dataService: DataService){
+  constructor (private dataService: DataService){ }
+
+
+  ngOnInit(): void {
     this.dataService.getData().subscribe({
       next:(list:Data[])=>this.dataList=list,
       error:(e:any)=>console.error("Error",e),
